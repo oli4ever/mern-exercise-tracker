@@ -25,9 +25,6 @@ jobs:
         run: |
           cd client
           npm run build
-          # Move build output to server directory
-          mkdir -p ../server/client/dist
-          cp -r dist/* ../server/client/dist/
 
       - name: Deploy to Railway
         uses: railwayapp/action@v1
@@ -40,3 +37,4 @@ jobs:
             ATLAS_URI=${{ secrets.ATLAS_URI }}
             PORT=${{ secrets.PORT }}
             NODE_ENV=production
+            FRONTEND_URL=https://mern-exercise-tracker-production-cdae.up.railway.app/

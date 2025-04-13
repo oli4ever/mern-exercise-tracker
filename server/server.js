@@ -21,18 +21,27 @@ const __dirname = path.dirname(__filename);
 // CORS Configuration
 const allowedOrigins = [
   process.env.FRONTEND_URL || 'http://localhost:5173',
-  'https://*.railway.app'
+  'https://*.railway.app',
+  'https://mern-exercise-tracker-production-cdae.up.railway.app' // Add your actual production URL
 ];
 
 app.use(cors({
-  origin: (origin, callback) => {
-    if (!origin || allowedOrigins.some(allowed => origin.startsWith(allowed))) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+    
+    if (allowedOrigins.some(allowed => {
+      return origin.match(new RegExp(`^https?://(${allowed.replace('*.', '.*\.')})$`, 'i'));
+    })) {
+      return callback(null, true);
     }
+    
+    const msg = `CORS blocked for origin: ${origin}. Allowed origins: ${allowedOrigins.join(', ')}`;
+    return callback(new Error(msg), false);
   },
-  credentials: true
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
 app.use(express.json());
@@ -62,12 +71,13 @@ app.use('/api/users', usersRouter);
 // Production setup
 if (process.env.NODE_ENV === 'production') {
   // Serve static files from the correct location
-  const clientDistPath = path.join(__dirname, 'client/dist');
-  app.use(express.static(clientDistPath));
+  const clientPath = path.join(__dirname, '../client');
+  // Serve all static files from client folder
+  app.use(express.static(clientPath));
   
   // Handle SPA routing
   app.get('*', (_, res) => {
-    res.sendFile(path.join(clientDistPath, 'index.html'));
+    res.sendFile(path.join(clientPath, 'index.html'));
   });
 }
 
