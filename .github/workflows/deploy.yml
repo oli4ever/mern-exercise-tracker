@@ -19,6 +19,7 @@ jobs:
         run: |
           npm install
           cd client && npm install
+          cd ../server && npm install
 
       - name: Build client
         run: npm run build
@@ -29,3 +30,8 @@ jobs:
           railway-token: ${{ secrets.RAILWAY_TOKEN }}
           project-id: ${{ secrets.RAILWAY_PROJECT_ID }}
           environment: production
+          service-name: "exercise-tracker-backend"
+          variables: |
+            ATLAS_URI=${{ secrets.ATLAS_URI }}
+            PORT=${{ secrets.PORT }}
+            NODE_ENV=production

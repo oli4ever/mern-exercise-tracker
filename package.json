@@ -1,18 +1,24 @@
 {
   "name": "mern-exercise-tracker-root",
   "version": "1.0.0",
+  "type": "module",
   "scripts": {
     "install-all": "npm install && cd client && npm install",
     "client": "cd client && npm run dev",
     "server": "cd server && npm run dev",
     "dev": "concurrently \"npm run client\" \"npm run server\"",
     "build": "cd client && npm install && npm run build",
-    "start": "node server/server.js"
+    "start": "node server/server.js",
+    "prepare": "cd server && npm install"
   },
   "devDependencies": {
     "concurrently": "^8.2.2"
   },
   "dependencies": {
+    "dotenv": "^16.5.0",
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "mongoose": "^8.0.3",
     "react-datepicker": "^8.3.0",
     "react-router-dom": "^7.4.1"
   }

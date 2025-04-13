@@ -1,0 +1,107 @@
+Exercise Tracker App Mongodb Database:
+User:ittracker11, Password:vis!T2m0nGo79
+
+RAILWAY_TOKEN:6b86fb77-6383-4ec2-ac18-5f1213f2a7b7
+RAILWAY_PROJECT_ID = 05bfb8bb-4484-4a6e-8bc9-f9c5063b912b
+
+Railway log:
+Starting Container
+
+npm warn config production Use `--omit=dev` instead.
+
+ 
+
+> mern-exercise-tracker-root@1.0.0 start
+
+> node server/server.js
+
+ 
+
+node:internal/errors:496
+
+    ErrorCaptureStackTrace(err);
+
+    ^
+
+ 
+
+Error [ERR_MODULE_NOT_FOUND]: Cannot find package 'dotenv' imported from /app/server/server.js
+
+    at new NodeError (node:internal/errors:405:5)
+
+    at packageResolve (node:internal/modules/esm/resolve:916:9)
+
+    at moduleResolve (node:internal/modules/esm/resolve:973:20)
+
+    at defaultResolve (node:internal/modules/esm/resolve:1206:11)
+
+    at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:404:12)
+
+    at ModuleLoader.resolve (node:internal/modules/esm/loader:373:25)
+
+    at ModuleLoader.getModuleJob (node:internal/modules/esm/loader:250:38)
+
+    at ModuleWrap.<anonymous> (node:internal/modules/esm/module_job:76:39)
+
+    at link (node:internal/modules/esm/module_job:75:36) {
+
+  code: 'ERR_MODULE_NOT_FOUND'
+
+}
+
+ 
+
+Node.js v18.20.5
+
+npm warn config production Use `--omit=dev` instead.
+
+ 
+
+> mern-exercise-tracker-root@1.0.0 start
+
+> node server/server.js
+
+ 
+
+node:internal/errors:496
+
+    ErrorCaptureStackTrace(err);
+
+    ^
+
+ 
+
+Error [ERR_MODULE_NOT_FOUND]: Cannot find package 'dotenv' imported from /app/server/server.js
+
+    at new NodeError (node:internal/errors:405:5)
+
+    at packageResolve (node:internal/modules/esm/resolve:916:9)
+
+    at moduleResolve (node:internal/modules/esm/resolve:973:20)
+
+    at defaultResolve (node:internal/modules/esm/resolve:1206:11)
+
+    at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:404:12)
+
+    at ModuleLoader.resolve (node:internal/modules/esm/loader:373:25)
+
+    at ModuleLoader.getModuleJob (node:internal/modules/esm/loader:250:38)
+
+    at ModuleWrap.<anonymous> (node:internal/modules/esm/module_job:76:39)
+
+    at link (node:internal/modules/esm/module_job:75:36) {
+
+  code: 'ERR_MODULE_NOT_FOUND'
+
+}
+
+ 
+
+Node.js v18.20.5
+
+npm warn config production Use `--omit=dev` instead.
+
+
+
+
+
