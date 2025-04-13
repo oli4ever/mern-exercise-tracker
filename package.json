@@ -2,7 +2,7 @@
   "name": "mern-exercise-tracker-root",
   "version": "1.0.0",
   "scripts": {
-    "install-all": "npm install && cd client && npm install && cd ../server && npm install",
+    "install-all": "npm install && cd client && npm install",
     "client": "cd client && npm run dev",
     "server": "cd server && npm run dev",
     "dev": "concurrently \"npm run client\" \"npm run server\"",

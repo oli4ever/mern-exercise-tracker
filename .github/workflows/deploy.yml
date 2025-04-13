@@ -17,8 +17,8 @@ jobs:
 
       - name: Install dependencies
         run: |
-          cd server && npm install
-          cd ../client && npm install
+          npm install
+          cd client && npm install
 
       - name: Build client
         run: npm run build

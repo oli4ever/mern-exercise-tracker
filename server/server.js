@@ -1,3 +1,5 @@
+import 'dotenv/config'; // Load env vars first
+console.log('MongoDB URI:', process.env.ATLAS_URI?.substring(0, 15) + '...'); // Verify env
 import dotenv from 'dotenv';
 import express from 'express';
 import cors from 'cors';
