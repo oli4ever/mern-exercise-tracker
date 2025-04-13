@@ -12,6 +12,12 @@ export default defineConfig({
     }
   },
   build: {
-    outDir: ''  
+    outDir: './',  // Build directly in client folder
+    emptyOutDir: true,  // Clear existing files
+    rollupOptions: {
+      input: {
+        main: path.resolve(__dirname, 'index.html')
+      }
+    }
   }
 });
