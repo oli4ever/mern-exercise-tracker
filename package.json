@@ -3,12 +3,12 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "install-all": "npm install && cd client && npm install",
+    "install-all": "npm install && cd client && npm install && cd ../server && npm install",
     "client": "cd client && npm run dev",
     "server": "cd server && npm run dev",
     "dev": "concurrently \"npm run client\" \"npm run server\"",
     "build": "cd client && npm install && npm run build",
-    "start": "node server/server.js",
+    "start": "cd server && npm start",
     "prepare": "cd server && npm install"
   },
   "devDependencies": {
