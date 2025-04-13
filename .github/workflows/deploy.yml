@@ -22,7 +22,12 @@ jobs:
            cd ../server && npm install
 
       - name: Build client
-        run: cd client && npm run build
+        run: |
+          cd client
+          npm run build
+          # Move build output to server directory
+          mkdir -p ../server/client/dist
+          cp -r dist/* ../server/client/dist/
 
       - name: Deploy to Railway
         uses: railwayapp/action@v1

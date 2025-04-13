@@ -39,6 +39,11 @@ app.use(express.json());
 
 // Database connection
 const uri = process.env.ATLAS_URI;
+if (!uri) {
+  console.error("MongoDB connection URI is missing. Please set ATLAS_URI environment variable.");
+  process.exit(1);
+}
+
 mongoose.connect(uri, {
   dbName: 'exercise-tracker',
   retryWrites: true,
@@ -56,9 +61,13 @@ app.use('/api/users', usersRouter);
 
 // Production setup
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '../client/dist')));
+  // Serve static files from the correct location
+  const clientDistPath = path.join(__dirname, 'client/dist');
+  app.use(express.static(clientDistPath));
+  
+  // Handle SPA routing
   app.get('*', (_, res) => {
-    res.sendFile(path.join(__dirname, '../client/dist/index.html'));
+    res.sendFile(path.join(clientDistPath, 'index.html'));
   });
 }
 
