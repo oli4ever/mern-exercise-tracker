@@ -1,4 +1,5 @@
 import { createRequire } from 'module';
+import fs from 'fs';
 const require = createRequire(import.meta.url);
 require('dotenv').config();
 import 'dotenv/config';
@@ -64,9 +65,14 @@ app.use('/api/users', usersRouter);
 
 // Production setup
 if (process.env.NODE_ENV === 'production') {
-  const clientPath = path.join(__dirname, '../client');
+  const clientPath = path.join(__dirname, '../client/dist');
   
-  // Serve static assets from client folder
+  // Verify build exists
+  if (!fs.existsSync(clientPath)) {
+    console.error('Client build not found at:', clientPath);
+    process.exit(1);
+  }
+  
   app.use(express.static(clientPath));
   
   // Serve index.html for all routes

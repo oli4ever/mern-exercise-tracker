@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import path from 'path'
 
 export default defineConfig({
   plugins: [react()],
@@ -12,12 +13,11 @@ export default defineConfig({
     }
   },
   build: {
-    outDir: './',  // Build directly in client folder
+    outDir: './dist',  // Build directly in client folder
     emptyOutDir: true,  // Clear existing files
     rollupOptions: {
-      input: {
-        main: path.resolve(__dirname, 'index.html')
+      input: path.resolve(__dirname, 'index.html')
+        
       }
     }
-  }
 });
