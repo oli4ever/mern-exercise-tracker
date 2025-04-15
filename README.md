@@ -50,3 +50,26 @@ A full-stack fitness application built with the MERN stack (MongoDB, Express, Re
 - Railway.app (Hosting)
 - GitHub Actions (CI/CD)
 - Environment Variables
+
+## Installation
+
+1. Clone the repository:
+git clone https://github.com/oli4ever/mern-exercise-tracker.git
+2. Install dependencies:
+   cd mern-exercise-tracker
+   npm install
+   cd client && npm install
+   cd ../server && npm install
+3. Set up environment variables:
+   # server/.env
+   ATLAS_URI=your_mongodb_connection_string
+   PORT=5000
+
+  # client/.env
+  VITE_API_URL=http://localhost:5000
+4. Run the development environment:
+   # Start backend
+     cd server && npm run dev
+
+   # Start frontend (in new terminal)
+     cd client && npm run dev
