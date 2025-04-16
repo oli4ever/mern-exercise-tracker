@@ -1,5 +1,5 @@
-import { createRequire } from 'module';
 import fs from 'fs';
+import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
 require('dotenv').config();
 import 'dotenv/config';
@@ -13,27 +13,25 @@ import usersRouter from './routes/users.js';
 
 // Initialize app
 const app = express();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 8080;
 
 // ES Modules equivalent for __dirname
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // CORS Configuration
-const allowedOrigins = [
-  'http://localhost:5173',
-  'https://mern-exercise-tracker-production-cdae.up.railway.app',
-  'https://*.railway.app'
-];
+// const allowedOrigins = [
+//   'http://localhost:5173',
+//   'https://mern-exercise-tracker-production-cdae.up.railway.app',
+//   'https://*.railway.app'
+// ];
 
 app.use(cors({
-  origin: function (origin, callback) {
-    // Allow all subdomains of railway.app and localhost
-    if (!origin || origin.endsWith('.railway.app') || origin.includes('localhost')) {
-      return callback(null, true);
-    }
-    callback(new Error('Not allowed by CORS'));
-  },
+  origin: [
+    'http://localhost:5173',
+    'https://mern-exercise-tracker-production-cdae.up.railway.app',
+    'https://*.railway.app'
+  ],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
@@ -92,4 +90,16 @@ app.use((err, req, res, next) => {
 
 app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);
+});
+
+mongoose.connection.on('connected', () => {
+  console.log('Mongoose connected to DB');
+});
+
+mongoose.connection.on('error', (err) => {
+  console.error('Mongoose connection error:', err);
+});
+
+mongoose.connection.on('disconnected', () => {
+  console.log('Mongoose disconnected');
 });

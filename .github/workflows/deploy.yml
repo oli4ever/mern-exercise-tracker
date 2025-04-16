@@ -38,3 +38,4 @@ jobs:
             PORT=${{ secrets.PORT }}
             NODE_ENV=production
             FRONTEND_URL=https://mern-exercise-tracker-production-cdae.up.railway.app/
+            VITE_API_URL=https://mern-exercise-tracker-production-cdae.up.railway.app
