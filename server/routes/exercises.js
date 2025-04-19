@@ -135,4 +135,17 @@ router.route('/:id').delete(async (req, res) => {
   }
 });
 
+router.get('/', async (req, res, next) => {
+  try {
+    const exercises = await Exercise.find();
+    if (!exercises || exercises.length === 0) {
+      return res.status(404).json({ message: 'No exercises found' });
+    }
+    res.json(exercises);
+  } catch (err) {
+    console.error('Error fetching exercises:', err);
+    next(err);
+  }
+});
+
 export default router;

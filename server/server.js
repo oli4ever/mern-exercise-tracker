@@ -64,14 +64,20 @@ process.on('unhandledRejection', (reason, promise) => {
 
 // Production setup
 if (process.env.NODE_ENV === 'production') {
-  const clientPath = path.join(__dirname, '../client/dist');
+  const clientPath = path.join(__dirname, '../../client/dist');
 
-  console.log('Looking for client build at:', clientPath);
+  console.log('Production mode - looking for client build at:', clientPath);
   
   // Verify build exists
   if (!fs.existsSync(clientPath)) {
-    console.error('Client build not found. Current directory:', __dirname);
-    console.error('Directory contents:', fs.readdirSync(path.join(__dirname, '..')));
+    console.error('Client build not found at:', clientPath);
+    console.log('Attempting to build client...');
+    try {
+      const { execSync } = require('child_process');
+      execSync('cd ../../client && npm run build', { stdio: 'inherit' });
+    } catch (buildError) {
+      console.error('Client build failed:', buildError);
+    }
   }
   
   app.use(express.static(clientPath));
@@ -100,7 +106,17 @@ app.listen(port, () => {
 });
 
 mongoose.connection.on('connected', () => {
-  console.log('Mongoose connected to DB');
+  console.log('Mongoose connected to:', mongoose.connection.db.databaseName);
+});
+
+// Add ping route to test DB connection
+app.get('/ping', async (req, res) => {
+  try {
+    await mongoose.connection.db.admin().ping();
+    res.json({ status: 'OK', dbState: mongoose.connection.readyState });
+  } catch (err) {
+    res.status(500).json({ error: 'DB connection failed', details: err.message });
+  }
 });
 
 mongoose.connection.on('error', (err) => {
