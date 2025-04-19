@@ -19,13 +19,6 @@ const port = process.env.PORT || 8080;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// CORS Configuration
-// const allowedOrigins = [
-//   'http://localhost:5173',
-//   'https://mern-exercise-tracker-production-cdae.up.railway.app',
-//   'https://*.railway.app'
-// ];
-
 app.use(cors({
   origin: [
     'http://localhost:5173',
