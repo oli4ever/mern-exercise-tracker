@@ -105,6 +105,22 @@ app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);
 });
 
+if (!process.env.ATLAS_URI) {
+  console.error("MongoDB connection URI is missing. Checking Railway variables...");
+  
+  // Try alternative ways to get the URI
+  process.env.ATLAS_URI = process.env.RAILWAY_ENVIRONMENT === 'production' 
+    ? process.env.MONGO_URL 
+    : 'mongodb://localhost:27017/exercise-tracker';
+  
+  if (!process.env.ATLAS_URI) {
+    console.error("FATAL: No MongoDB connection URI found");
+    process.exit(1);
+  }
+}
+
+console.log("Connecting to MongoDB with URI:", process.env.ATLAS_URI.replace(/\/\/[^@]+@/, '//****:****@'));
+
 mongoose.connection.on('connected', () => {
   console.log('Mongoose connected to:', mongoose.connection.db.databaseName);
 });
