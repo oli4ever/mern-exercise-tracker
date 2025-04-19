@@ -56,7 +56,7 @@ app.use('/api/users', usersRouter);
 
 // Production setup
 if (process.env.NODE_ENV === 'production') {
-  const clientPath = path.join(__dirname, '../client/dist');
+  const clientPath = path.join(__dirname, '../../client/dist');
   
   // Verify build exists
   if (!fs.existsSync(clientPath)) {
@@ -71,6 +71,10 @@ if (process.env.NODE_ENV === 'production') {
     res.sendFile(path.join(clientPath, 'index.html'));
   });
 }
+
+app.get('/health', (req, res) => {
+  res.status(200).json({ status: 'healthy' });
+});
 
 // Error handling middleware
 app.use((err, req, res, next) => {
