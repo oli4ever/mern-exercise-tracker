@@ -54,14 +54,24 @@ mongoose.connect(uri, {
 app.use('/api/exercises', exercisesRouter);
 app.use('/api/users', usersRouter);
 
+process.on('uncaughtException', (err) => {
+  console.error('Uncaught Exception:', err);
+});
+
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('Unhandled Rejection at:', promise, 'reason:', reason);
+});
+
 // Production setup
 if (process.env.NODE_ENV === 'production') {
-  const clientPath = path.join(__dirname, '../../client/dist');
+  const clientPath = path.join(__dirname, '../client/dist');
+
+  console.log('Looking for client build at:', clientPath);
   
   // Verify build exists
   if (!fs.existsSync(clientPath)) {
-    console.error('Client build not found at:', clientPath);
-    process.exit(1);
+    console.error('Client build not found. Current directory:', __dirname);
+    console.error('Directory contents:', fs.readdirSync(path.join(__dirname, '..')));
   }
   
   app.use(express.static(clientPath));
