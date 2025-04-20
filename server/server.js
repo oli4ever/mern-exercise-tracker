@@ -1,3 +1,10 @@
+console.log('Current Environment Variables:', {
+  NODE_ENV: process.env.NODE_ENV,
+  PORT: process.env.PORT,
+  ATLAS_URI: process.env.ATLAS_URI ? '****' : 'NOT FOUND',
+  RAILWAY_ENVIRONMENT: process.env.RAILWAY_ENVIRONMENT
+});
+
 import fs from 'fs';
 import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
