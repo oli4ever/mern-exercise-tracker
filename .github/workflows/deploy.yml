@@ -18,8 +18,8 @@ jobs:
       - name: Install dependencies
         run: |
           npm install
-           cd client && npm install
-           cd ../server && npm install
+          cd client && npm install
+          cd ../server && npm install
 
       - name: Build client
         run: |
@@ -32,10 +32,9 @@ jobs:
           railway-token: ${{ secrets.RAILWAY_TOKEN }}
           project-id: ${{ secrets.RAILWAY_PROJECT_ID }}
           environment: production
-          service-name: "exercise-tracker-backend"
+          service-name: "mern-exercise-tracker" # Changed to match your Railway service name
           variables: |
             ATLAS_URI=${{ secrets.ATLAS_URI }}
-            PORT=${{ secrets.PORT }}
+            PORT=5000
             NODE_ENV=production
-            FRONTEND_URL=https://mern-exercise-tracker-production-cdae.up.railway.app/
             VITE_API_URL=https://mern-exercise-tracker-production-cdae.up.railway.app

@@ -8,8 +8,9 @@
     "server": "cd server && npm run dev",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "build": "cd client && npm run build",
-    "start": "node server/server.js",
-    "prestart": "npm run build"
+    "start": "cd server && node server.js",
+    "prestart": "npm run build",
+    "railway-start": "cd server && NODE_ENV=production node server.js"
   },
   "devDependencies": {
     "concurrently": "^8.2.2"

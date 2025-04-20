@@ -30,7 +30,7 @@ const __dirname = path.dirname(__filename);
 // Enhanced CORS configuration
 app.use(cors({
   origin: [
-    'http://localhost:5173',
+    process.env.VITE_API_URL || 'http://localhost:5173',
     'https://mern-exercise-tracker-production-cdae.up.railway.app',
     'https://*.railway.app'
   ],
@@ -46,7 +46,7 @@ console.log('Mongoose version:', mongoose.version);
 
 // Database connection setup
 async function connectToDatabase() {
-  const uri = "mongodb+srv://ittracker11:visiT4m0nGo25@cluster0.wbh0l.mongodb.net/exercise-tracker?retryWrites=true&w=majority&appName=Cluster0";
+  const uri = process.env.ATLAS_URI || "mongodb+srv://ittracker11:visiT4m0nGo25@cluster0.wbh0l.mongodb.net/exercise-tracker?retryWrites=true&w=majority&appName=Cluster0";
   if (!uri) {
     console.error("❌ MongoDB connection URI is missing");
     process.exit(1);
