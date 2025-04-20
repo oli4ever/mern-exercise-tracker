@@ -46,7 +46,7 @@ console.log('Mongoose version:', mongoose.version);
 
 // Database connection setup
 async function connectToDatabase() {
-  const uri = process.env.ATLAS_URI;
+  const uri = "mongodb+srv://ittracker11:visiT4m0nGo25@cluster0.wbh0l.mongodb.net/exercise-tracker?retryWrites=true&w=majority&appName=Cluster0";
   if (!uri) {
     console.error("❌ MongoDB connection URI is missing");
     process.exit(1);
